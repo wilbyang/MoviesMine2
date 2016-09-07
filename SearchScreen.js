@@ -32,6 +32,7 @@ var dismissKeyboard = require('dismissKeyboard');
 
 var MovieCell = require('./MovieCell');
 var MovieScreen = require('./MovieScreen');
+var MovieFacet = require('./MovieFacet');
 var SearchBar = require('SearchBar');
 
 /**
@@ -308,8 +309,11 @@ var SearchScreen = React.createClass({
         <SearchBar
           onSearchChange={this.onSearchChange}
           isLoading={this.state.isLoading}
-          onFocus={() =>
-            this.refs.listview && this.refs.listview.getScrollResponder().scrollTo({ x: 0, y: 0 })}
+          onFocus={() => this.props.navigator.push({
+            title: movie.title,
+            component: MovieFacet,
+            passProps: {movie},
+          })}
         />
         <View style={styles.separator} />
         {content}

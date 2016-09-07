@@ -38,10 +38,15 @@ class MoviesApp extends React.Component {
     return (
       <TabBarIOS>
         <Icon.TabBarItem
-          title="In theater movies"
+          title="In theater"
           selected={this.state.selectedTab === 'greenTab'}
           iconName="ios-home-outline"
           selectedIconName="ios-home"
+          onPress={() => {
+            this.setState({
+              selectedTab: 'greenTab'
+            });
+          }}
         >
           <NavigatorIOS
             style={styles.container}
@@ -52,10 +57,16 @@ class MoviesApp extends React.Component {
           />
         </Icon.TabBarItem>
 
-        <TabBarIOS.Item
-          title="coming movies"
+        <Icon.TabBarItem
+          title="Coming"
           selected={this.state.selectedTab === 'redTab'}
-          icon={{uri: base64Icon, scale: 3}}
+          iconName="ios-home-outline"
+          selectedIconName="ios-home"
+          onPress={() => {
+            this.setState({
+              selectedTab: 'redTab'
+            });
+          }}
         >
           <NavigatorIOS
             style={styles.container}
@@ -64,7 +75,7 @@ class MoviesApp extends React.Component {
               component: SearchScreen,
             }}
           />
-        </TabBarIOS.Item>
+        </Icon.TabBarItem>
       </TabBarIOS>
     );
   }

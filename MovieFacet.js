@@ -1,18 +1,22 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+'use strict';
 
-export default class MovieFacet extends Component {
-  static get defaultProps() {
-    return {
-      title: 'MovieFacet'
-    };
-  }
+var React = require('react');
+var ReactNative = require('react-native');
+var {
+  Text,
+  View,
+} = ReactNative;
+
+
+class MovieFacet extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={{flex:1, backgroundColor: '#dddddd'}}>
         <Text>Hi! My name is {this.props.title}.</Text>
       </View>
     )
   }
 }
+
+module.exports = MovieFacet;

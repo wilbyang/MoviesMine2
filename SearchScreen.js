@@ -18,6 +18,7 @@
 var React = require('react');
 var ReactNative = require('react-native');
 var {
+  Navigator,
   ActivityIndicator,
   ListView,
   Platform,
@@ -310,9 +311,11 @@ var SearchScreen = React.createClass({
           onSearchChange={this.onSearchChange}
           isLoading={this.state.isLoading}
           onFocus={() => this.props.navigator.push({
-            title: movie.title,
+            title: "xxhh",
             component: MovieFacet,
-            passProps: {movie},
+            rightButtonTitle: 'Add',
+            barTintColor: '#996699',
+            passProps: {title: "movie facet"},
           })}
         />
         <View style={styles.separator} />

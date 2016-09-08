@@ -191,7 +191,7 @@ class SearchScreen extends React.Component {
       .done();
   }
 
-  hasMore(): boolean {
+  hasMore() {
     var query = this.state.filter;
     if (!resultsCache.dataForQuery[query]) {
       return true;
@@ -335,7 +335,7 @@ class SearchScreen extends React.Component {
         ref="listview"
         renderSeparator={this.renderSeparator}
         dataSource={this.state.dataSource}
-        renderFooter={this.renderFooter}
+        renderFooter={this.renderFooter.bind(this)}
         renderRow={this.renderRow}
         onEndReached={this.onEndReached}
         automaticallyAdjustContentInsets={false}

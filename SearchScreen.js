@@ -64,26 +64,6 @@ var SearchScreen = React.createClass({
 
   timeoutID: (null: any),
 
-  navigatorButtons: {
-    leftButtons: [{
-      icon: require('./img/navicon_menu.png'),
-      id: 'menu'
-    }],
-    rightButtons: [
-      {
-        title: 'Edit',
-        id: 'edit'
-      },
-      {
-        icon: require('./img/navicon_add.png'),
-        id: 'add'
-      }
-    ]
-  },
-  navigatorStyle: {
-    drawUnderTabBar: true
-  },
-
   getInitialState: function() {
     return {
       isLoading: false,

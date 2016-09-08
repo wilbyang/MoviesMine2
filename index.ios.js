@@ -14,6 +14,26 @@ Navigation.startSingleScreenApp({
   screen: {
     screen: 'MovieSearch',
     title: 'Movies',
+    passProps: {
+      navigatorButtons: {
+      leftButtons: [{
+        icon: require('./img/navicon_menu.png'),
+        id: 'menu'
+      }],
+      rightButtons: [
+        {
+          title: 'Edit',
+          id: 'edit'
+        },
+        {
+          icon: require('./img/navicon_add.png'),
+          id: 'add'
+        }
+      ]
+    },
+      navigatorStyle: {
+        drawUnderTabBar: true
+      }},
     navigatorStyle: {
       navBarBackgroundColor: '#4dbce9',
       navBarTextColor: '#ffff00',

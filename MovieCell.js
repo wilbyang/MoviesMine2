@@ -42,6 +42,7 @@ class MovieCell extends React.Component {
       <View>
         <TouchableElement
           onPress={this.props.onSelect}
+          onLongPress={this.props.onSelect}
           onShowUnderlay={this.props.onHighlight}
           onHideUnderlay={this.props.onUnhighlight}>
           <View style={styles.row}>

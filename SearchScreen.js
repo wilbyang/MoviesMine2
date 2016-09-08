@@ -26,15 +26,15 @@ var {
   Text,
   View,
 } = ReactNative;
-var TimerMixin = require('react-timer-mixin');
+import TimerMixin from 'react-timer-mixin';
 
-var invariant = require('fbjs/lib/invariant');
-var dismissKeyboard = require('dismissKeyboard');
+import invariant from 'fbjs/lib/invariant';
+import dismissKeyboard from 'dismissKeyboard';
 
-var MovieCell = require('./MovieCell');
-var MovieScreen = require('./MovieScreen');
-var MovieFacet = require('./MovieFacet');
-var SearchBar = require('SearchBar');
+import MovieCell from './MovieCell';
+import MovieScreen from './MovieScreen';
+import MovieFacet from './MovieFacet';
+import SearchBar from './SearchBar';
 
 /**
  * This is for demo purposes only, and rate limited.

@@ -21,6 +21,7 @@ var ReactNative = require('react-native');
 var {
   AppRegistry,
   NavigatorIOS,
+  Navigator,
   TabBarIOS,
   StyleSheet,
 } = ReactNative;
@@ -54,6 +55,8 @@ class MoviesApp extends React.Component {
               title: 'Movies',
               component: SearchScreen,
             }}
+            configureScene={(route, routeStack) =>
+              Navigator.SceneConfigs.FloatFromBottom}
           />
         </Icon.TabBarItem>
 
@@ -74,6 +77,8 @@ class MoviesApp extends React.Component {
               title: 'Movies',
               component: SearchScreen,
             }}
+            configureScene={(route, routeStack) =>
+              Navigator.SceneConfigs.FloatFromBottom}
           />
         </Icon.TabBarItem>
       </TabBarIOS>

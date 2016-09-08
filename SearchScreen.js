@@ -18,7 +18,7 @@
 var React = require('react');
 var ReactNative = require('react-native');
 var {
-  Navigator,
+  AlertIOS,
   ActivityIndicator,
   ListView,
   Platform,
@@ -336,8 +336,8 @@ class SearchScreen extends React.Component {
         renderSeparator={this.renderSeparator}
         dataSource={this.state.dataSource}
         renderFooter={this.renderFooter.bind(this)}
-        renderRow={this.renderRow}
-        onEndReached={this.onEndReached}
+        renderRow={this.renderRow.bind(this)}
+        onEndReached={this.onEndReached.bind(this)}
         automaticallyAdjustContentInsets={false}
         keyboardDismissMode="on-drag"
         keyboardShouldPersistTaps={true}

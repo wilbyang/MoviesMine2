@@ -261,10 +261,9 @@ var SearchScreen = React.createClass({
 
   selectMovie: function(movie: Object) {
     if (Platform.OS === 'ios') {
-      this.props.navigator.push({
-        title: movie.title,
-        component: MovieScreen,
-        passProps: {movie},
+      this.props.navigator.showModal({
+        title: "Modal",
+        screen: "example.ModalScreen"
       });
     } else {
       dismissKeyboard();

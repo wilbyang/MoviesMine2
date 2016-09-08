@@ -59,29 +59,50 @@ var resultsCache = {
 
 var LOADING = {};
 
-var SearchScreen = React.createClass({
-  mixins: [TimerMixin],
+class SearchScreen extends React.Component {
 
-  timeoutID: (null: any),
+  //static timeoutID: (null: any);
 
-  getInitialState: function() {
-    return {
+
+  static navigatorButtons = {
+    leftButtons: [{
+      icon: require('./img/navicon_menu.png'),
+      id: 'menu'
+    }],
+    rightButtons: [
+      {
+        title: 'Edit',
+        id: 'edit'
+      },
+      {
+        icon: require('./img/navicon_add.png'),
+        id: 'add'
+      }
+    ]
+  };
+  static navigatorStyle = {
+    drawUnderTabBar: true
+  };
+  constructor(props) {
+    super(props);
+    this.state = {
       isLoading: false,
       isLoadingTail: false,
       dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
+      rowHasChanged: (row1, row2) => row1 !== row2,
       }),
       filter: '',
       queryNumber: 0,
     };
-  },
+    // if you want to listen on navigator events, set this up
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+  }
 
-  componentDidMount: function() {
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+  componentDidMount() {
 
     this.searchMovies('');
-  },
-  onNavigatorEvent: function(event) {
+  }
+  onNavigatorEvent(event) {
     if (event.id == 'menu') {
       this.props.navigator.toggleDrawer({
         side: 'left',
@@ -94,44 +115,11 @@ var SearchScreen = React.createClass({
     if (event.id == 'add') {
       AlertIOS.alert('NavBar', 'Add button pressed');
     }
-  },
+  }
 
 
 
-
-  onPushPress:function() {
-    this.props.navigator.push({
-      title: "More",
-      screen: "example.PushedScreen"
-    });
-  },
-  onPushStyledPress:function() {
-    this.props.navigator.push({
-      title: "Styled",
-      screen: "example.StyledScreen"
-    });
-  },
-  onModalPress:function() {
-    this.props.navigator.showModal({
-      title: "Modal",
-      screen: "example.ModalScreen"
-    });
-  },
-  onLightBoxPress:function() {
-    this.props.navigator.showLightBox({
-      screen: "example.LightBoxScreen",
-      style: {
-        backgroundBlur: "dark"
-      }
-    });
-  },
-  onInAppNotificationPress:function() {
-    this.props.navigator.showInAppNotification({
-      screen: "example.NotificationScreen"
-    });
-  },
-
-  _urlForQueryAndPage: function(query: string, pageNumber: number): string {
+  _urlForQueryAndPage(query: string, pageNumber: number): string {
     var apiKey = API_KEYS[this.state.queryNumber % API_KEYS.length];
     if (query) {
       return (
@@ -145,9 +133,9 @@ var SearchScreen = React.createClass({
         '&page_limit=20&page=' + pageNumber
       );
     }
-  },
+  }
 
-  searchMovies: function(query: string) {
+  searchMovies(query: string) {
     this.timeoutID = null;
 
     this.setState({filter: query});
@@ -201,9 +189,9 @@ var SearchScreen = React.createClass({
         });
       })
       .done();
-  },
+  }
 
-  hasMore: function(): boolean {
+  hasMore(): boolean {
     var query = this.state.filter;
     if (!resultsCache.dataForQuery[query]) {
       return true;
@@ -212,9 +200,9 @@ var SearchScreen = React.createClass({
       resultsCache.totalForQuery[query] !==
       resultsCache.dataForQuery[query].length
     );
-  },
+  }
 
-  onEndReached: function() {
+  onEndReached() {
     var query = this.state.filter;
     if (!this.hasMore() || this.state.isLoadingTail) {
       // We're already fetching or have all the elements so noop
@@ -268,13 +256,13 @@ var SearchScreen = React.createClass({
         });
       })
       .done();
-  },
+  }
 
-  getDataSource: function(movies: Array<any>): ListView.DataSource {
+  getDataSource(movies: Array<any>): ListView.DataSource {
     return this.state.dataSource.cloneWithRows(movies);
-  },
+  }
 
-  selectMovie: function(movie: Object) {
+  selectMovie(movie: Object) {
     if (Platform.OS === 'ios') {
       this.props.navigator.push({
         title: movie.title,
@@ -289,24 +277,24 @@ var SearchScreen = React.createClass({
         movie: movie,
       });
     }
-  },
+  }
 
-  onSearchChange: function(event: Object) {
+  onSearchChange(event: Object) {
     var filter = event.nativeEvent.text.toLowerCase();
 
     this.clearTimeout(this.timeoutID);
     this.timeoutID = this.setTimeout(() => this.searchMovies(filter), 100);
-  },
+  }
 
-  renderFooter: function() {
+  renderFooter() {
     if (!this.hasMore() || !this.state.isLoadingTail) {
       return <View style={styles.scrollSpinner} />;
     }
 
     return <ActivityIndicator style={styles.scrollSpinner} />;
-  },
+  }
 
-  renderSeparator: function(
+  renderSeparator(
     sectionID: number | string,
     rowID: number | string,
     adjacentRowHighlighted: boolean
@@ -318,9 +306,9 @@ var SearchScreen = React.createClass({
     return (
       <View key={'SEP_' + sectionID + '_' + rowID}  style={style}/>
     );
-  },
+  }
 
-  renderRow: function(
+  renderRow(
     movie: Object,
     sectionID: number | string,
     rowID: number | string,
@@ -335,9 +323,9 @@ var SearchScreen = React.createClass({
         movie={movie}
       />
     );
-  },
+  }
 
-  render: function() {
+  render() {
     var content = this.state.dataSource.getRowCount() === 0 ?
       <NoMovies
         filter={this.state.filter}
@@ -370,8 +358,8 @@ var SearchScreen = React.createClass({
         {content}
       </View>
     );
-  },
-});
+  }
+};
 
 class NoMovies extends React.Component {
   render() {

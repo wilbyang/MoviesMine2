@@ -2,6 +2,7 @@ import { Navigation } from 'react-native-navigation';
 
 import FirstTabScreen from './FirstTabScreen';
 import SearchScreen from './../SearchScreen';
+import MovieScreen from './../MovieScreen';
 import SecondTabScreen from './SecondTabScreen';
 import ThirdTabScreen from './ThirdTabScreen';
 import PushedScreen from './PushedScreen';
@@ -14,6 +15,7 @@ import SideMenu from './SideMenu';
 // register all screens of the app (including internal ones)
 export function registerScreens() {
   Navigation.registerComponent('MovieSearch', () => SearchScreen);
+  Navigation.registerComponent('MovieScreen', () => MovieScreen);
   Navigation.registerComponent('example.SecondTabScreen', () => SecondTabScreen);
   Navigation.registerComponent('example.ThirdTabScreen', () => ThirdTabScreen);
   Navigation.registerComponent('example.PushedScreen', () => PushedScreen);

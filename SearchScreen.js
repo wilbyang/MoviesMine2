@@ -97,7 +97,7 @@ var SearchScreen = React.createClass({
   },
 
   componentDidMount: function() {
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
 
     this.searchMovies('');
   },
@@ -114,6 +114,41 @@ var SearchScreen = React.createClass({
     if (event.id == 'add') {
       AlertIOS.alert('NavBar', 'Add button pressed');
     }
+  },
+
+
+
+
+  onPushPress:function() {
+    this.props.navigator.push({
+      title: "More",
+      screen: "example.PushedScreen"
+    });
+  },
+  onPushStyledPress:function() {
+    this.props.navigator.push({
+      title: "Styled",
+      screen: "example.StyledScreen"
+    });
+  },
+  onModalPress:function() {
+    this.props.navigator.showModal({
+      title: "Modal",
+      screen: "example.ModalScreen"
+    });
+  },
+  onLightBoxPress:function() {
+    this.props.navigator.showLightBox({
+      screen: "example.LightBoxScreen",
+      style: {
+        backgroundBlur: "dark"
+      }
+    });
+  },
+  onInAppNotificationPress:function() {
+    this.props.navigator.showInAppNotification({
+      screen: "example.NotificationScreen"
+    });
   },
 
   _urlForQueryAndPage: function(query: string, pageNumber: number): string {
@@ -261,9 +296,10 @@ var SearchScreen = React.createClass({
 
   selectMovie: function(movie: Object) {
     if (Platform.OS === 'ios') {
-      this.props.navigator.showModal({
-        title: "Modal",
-        screen: "example.ModalScreen"
+      this.props.navigator.push({
+        title: movie.title,
+        screen: "MovieScreen",
+        passProps: {movie},
       });
     } else {
       dismissKeyboard();
@@ -345,12 +381,9 @@ var SearchScreen = React.createClass({
         <SearchBar
           onSearchChange={this.onSearchChange}
           isLoading={this.state.isLoading}
-          onFocus={() => this.props.navigator.push({
-            title: "xxhh",
-            component: MovieFacet,
-            rightButtonTitle: 'Add',
-            barTintColor: '#996699',
-            passProps: {title: "movie facet"},
+          onFocus={() => this.props.navigator.showModal({
+            title: "Modal",
+            screen: "example.ModalScreen"
           })}
         />
         <View style={styles.separator} />

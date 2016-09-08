@@ -64,6 +64,26 @@ var SearchScreen = React.createClass({
 
   timeoutID: (null: any),
 
+  navigatorButtons: {
+    leftButtons: [{
+      icon: require('./img/navicon_menu.png'),
+      id: 'menu'
+    }],
+    rightButtons: [
+      {
+        title: 'Edit',
+        id: 'edit'
+      },
+      {
+        icon: require('./img/navicon_add.png'),
+        id: 'add'
+      }
+    ]
+  },
+  navigatorStyle: {
+    drawUnderTabBar: true
+  },
+
   getInitialState: function() {
     return {
       isLoading: false,
@@ -77,7 +97,23 @@ var SearchScreen = React.createClass({
   },
 
   componentDidMount: function() {
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+
     this.searchMovies('');
+  },
+  onNavigatorEvent: function(event) {
+    if (event.id == 'menu') {
+      this.props.navigator.toggleDrawer({
+        side: 'left',
+        animated: true
+      });
+    }
+    if (event.id == 'edit') {
+      AlertIOS.alert('NavBar', 'Edit button pressed');
+    }
+    if (event.id == 'add') {
+      AlertIOS.alert('NavBar', 'Add button pressed');
+    }
   },
 
   _urlForQueryAndPage: function(query: string, pageNumber: number): string {

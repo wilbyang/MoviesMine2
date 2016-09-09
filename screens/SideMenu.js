@@ -14,7 +14,7 @@ export default class SideMenu extends Component {
   }
   render() {
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <View style={{flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column'}}>
 
         <Text style={styles.title}>Side Menu</Text>
 

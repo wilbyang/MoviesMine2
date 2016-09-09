@@ -9,7 +9,7 @@ import {
   StyleSheet,
   AlertIOS
 } from 'react-native';
-
+import SidemenuItem from './../components/SidemenuItem'
 export default class SideMenu extends Component {
   constructor(props) {
     super(props);
@@ -26,11 +26,12 @@ export default class SideMenu extends Component {
 
           <Text style={styles.title}>Side Menu</Text>
 
-          <TouchableOpacity onPress={ this.onReplaceTab2Press.bind(this) }>
-            <Text style={styles.button}>Replace Tab#2 Root</Text>
-          </TouchableOpacity>
+          <SidemenuItem iconName="rocket", iconSize=15, iconColor="red" title="Profile", onPress={this.onModalPress.bind(this)} >
 
-          <TouchableOpacity onPress={ this.onModalPress.bind(this) }>
+          </SidemenuItem>
+
+
+        <TouchableOpacity onPress={ this.onModalPress.bind(this) }>
             <Text style={styles.button}>Show Modal Screen</Text>
           </TouchableOpacity>
 

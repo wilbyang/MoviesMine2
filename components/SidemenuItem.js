@@ -5,11 +5,11 @@ var ReactNative = require('react-native');
 var {
   TouchableOpacity,
   Text,
-  Image,
+  View,
   StyleSheet,
 } = ReactNative;
 import Icon from 'react-native-vector-icons/FontAwesome';
-export default class SidemenuItem extends Component {
+export default class SidemenuItem extends React.Component {
 
   constructor(props) {
     super(props);
@@ -17,7 +17,7 @@ export default class SidemenuItem extends Component {
   render() {
     return (
       <View>
-        <Icon name={this.props.iconName} size={this.props.iconSize} color={this.props.iconColor}/>
+        <Icon name={this.props.iconName} size={15} color={this.props.iconColor}/>
         <TouchableOpacity onPress={ this.props.onPress}>
           <Text style={styles.button}>{this.props.title}</Text>
         </TouchableOpacity>
@@ -25,3 +25,19 @@ export default class SidemenuItem extends Component {
     );
   }
 }
+const styles = StyleSheet.create({
+  title: {
+    textAlign: 'center',
+    fontSize: 18,
+    marginBottom: 10,
+    marginTop:10,
+    fontWeight: '500'
+  },
+  button: {
+    textAlign: 'center',
+    fontSize: 18,
+    marginBottom: 10,
+    marginTop:10,
+    color: 'blue'
+  }
+});

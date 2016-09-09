@@ -26,7 +26,7 @@ export default class SideMenu extends Component {
 
           <Text style={styles.title}>Side Menu</Text>
 
-          <SidemenuItem iconName="rocket", iconSize=15, iconColor="red" title="Profile", onPress={this.onModalPress.bind(this)} >
+          <SidemenuItem iconName="rocket" iconColor="red" title="Profile" onPress={this.onModalPress.bind(this)} >
 
           </SidemenuItem>
 

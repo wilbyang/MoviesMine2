@@ -5,6 +5,7 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  TouchableHighlight,
   StyleSheet,
   AlertIOS
 } from 'react-native';
@@ -15,9 +16,13 @@ export default class SideMenu extends Component {
   }
   render() {
     return (
-      <View style={{flex: 1}}>
-        <Image style={styles.image} source={{uri: 'http://placehold.it/100x100'}}></Image>
-        <View style={{flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column'}}>
+      <View style={{paddingTop:40, flex: 1, backgroundColor: '#aaaaaa'}}>
+        <View style={{alignItems: 'center'}}>
+          <TouchableHighlight onPress={ this.onModalPress.bind(this) }>
+            <Image style={styles.image} source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/d/d2/Donald_Trump_August_19%2C_2015_%28cropped%29.jpg'}}></Image>
+          </TouchableHighlight>
+        </View>
+        <View style={{marginLeft: 30, flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column'}}>
 
           <Text style={styles.title}>Side Menu</Text>
 

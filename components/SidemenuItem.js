@@ -16,8 +16,8 @@ export default class SidemenuItem extends React.Component {
   }
   render() {
     return (
-      <View>
-        <Icon name={this.props.iconName} size={15} color={this.props.iconColor}/>
+      <View style={styles.container}>
+        <Icon name={this.props.iconName} size={this.props.iconSize} color={this.props.iconColor} style={{}}/>
         <TouchableOpacity onPress={ this.props.onPress}>
           <Text style={styles.button}>{this.props.title}</Text>
         </TouchableOpacity>
@@ -26,18 +26,14 @@ export default class SidemenuItem extends React.Component {
   }
 }
 const styles = StyleSheet.create({
-  title: {
-    textAlign: 'center',
-    fontSize: 18,
-    marginBottom: 10,
-    marginTop:10,
-    fontWeight: '500'
-  },
+
   button: {
     textAlign: 'center',
     fontSize: 18,
-    marginBottom: 10,
-    marginTop:10,
-    color: 'blue'
+    color: 'black',
+    marginLeft: 13
+  },
+  container: {
+    flexDirection: 'row'
   }
 });

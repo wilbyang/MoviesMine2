@@ -16,19 +16,19 @@ export default class SideMenu extends Component {
   }
   render() {
     return (
-      <View style={{paddingTop:40, flex: 1, backgroundColor: '#aaaaaa'}}>
+      <View style={{paddingTop:40, flex: 1, backgroundColor: 'grey'}}>
         <View style={{alignItems: 'center'}}>
           <TouchableHighlight onPress={ this.onModalPress.bind(this) }>
             <Image style={styles.image} source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/d/d2/Donald_Trump_August_19%2C_2015_%28cropped%29.jpg'}}></Image>
           </TouchableHighlight>
         </View>
-        <View style={{marginLeft: 30, flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column'}}>
+        <View style={{marginLeft: 30, flex:1, alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column'}}>
 
           <Text style={styles.title}>Side Menu</Text>
 
-          <SidemenuItem iconName="rocket" iconColor="red" title="Profile" onPress={this.onModalPress.bind(this)} >
+          <SidemenuItem iconName="film" iconColor="black" iconSize={15} title="Profile" onPress={this.onModalPress.bind(this)} />
+          <SidemenuItem iconName="heart" iconColor="black" iconSize={15} title="Bookmark" onPress={this.onModalPress.bind(this)} />
 
-          </SidemenuItem>
 
 
         <TouchableOpacity onPress={ this.onModalPress.bind(this) }>

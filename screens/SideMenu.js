@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+  Image,
   Text,
   View,
   ScrollView,
@@ -14,18 +15,21 @@ export default class SideMenu extends Component {
   }
   render() {
     return (
-      <View style={{flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column'}}>
+      <View style={{flex: 1}}>
+        <Image style={styles.image} source={{uri: 'http://placehold.it/100x100'}}></Image>
+        <View style={{flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column'}}>
 
-        <Text style={styles.title}>Side Menu</Text>
+          <Text style={styles.title}>Side Menu</Text>
 
-        <TouchableOpacity onPress={ this.onReplaceTab2Press.bind(this) }>
-          <Text style={styles.button}>Replace Tab#2 Root</Text>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={ this.onReplaceTab2Press.bind(this) }>
+            <Text style={styles.button}>Replace Tab#2 Root</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={ this.onModalPress.bind(this) }>
-          <Text style={styles.button}>Show Modal Screen</Text>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={ this.onModalPress.bind(this) }>
+            <Text style={styles.button}>Show Modal Screen</Text>
+          </TouchableOpacity>
 
+        </View>
       </View>
     );
   }
@@ -51,6 +55,11 @@ export default class SideMenu extends Component {
 }
 
 const styles = StyleSheet.create({
+  image: {
+    height: 100,
+    borderRadius: 50,
+    width: 100
+  },
   title: {
     textAlign: 'center',
     fontSize: 18,

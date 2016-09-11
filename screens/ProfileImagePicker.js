@@ -12,7 +12,7 @@ import {
 
 import ImagePicker from 'react-native-image-picker';
 
-export default class App extends React.Component {
+export default class ProfileImagePicker extends React.Component {
 
   state = {
     avatarSource: null,
@@ -61,34 +61,6 @@ export default class App extends React.Component {
     });
   }
 
-  selectVideoTapped() {
-    const options = {
-      title: 'Video Picker',
-      takePhotoButtonTitle: 'Take Video...',
-      mediaType: 'video',
-      videoQuality: 'medium'
-    };
-
-    ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
-
-      if (response.didCancel) {
-        console.log('User cancelled video picker');
-      }
-      else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      }
-      else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      }
-      else {
-        this.setState({
-          videoSource: response.uri
-        });
-      }
-    });
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -97,12 +69,6 @@ export default class App extends React.Component {
             { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
               <Image style={styles.avatar} source={this.state.avatarSource} />
             }
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.selectVideoTapped.bind(this)}>
-          <View style={[styles.avatar, styles.avatarContainer]}>
-            <Text>Select a Video</Text>
           </View>
         </TouchableOpacity>
 

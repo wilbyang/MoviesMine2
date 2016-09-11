@@ -29,11 +29,13 @@ const styles = StyleSheet.create({
 
   button: {
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 14,
     color: 'black',
     marginLeft: 13
   },
   container: {
+    marginTop:6,
+    marginBottom:8,
     flexDirection: 'row'
   }
 });

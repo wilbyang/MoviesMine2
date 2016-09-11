@@ -7,6 +7,7 @@ import SecondTabScreen from './SecondTabScreen';
 import ThirdTabScreen from './ThirdTabScreen';
 import PushedScreen from './PushedScreen';
 import StyledScreen from './StyledScreen';
+import ProfileImagePicker from './ProfileImagePicker';
 import ModalScreen from './ModalScreen';
 import LightBoxScreen from './LightBoxScreen';
 import NotificationScreen from './NotificationScreen'
@@ -16,6 +17,7 @@ import SideMenu from './SideMenu';
 export function registerScreens() {
   Navigation.registerComponent('MovieSearch', () => SearchScreen);
   Navigation.registerComponent('MovieScreen', () => MovieScreen);
+  Navigation.registerComponent('ProfileImagePicker', () => ProfileImagePicker);
   Navigation.registerComponent('example.SecondTabScreen', () => SecondTabScreen);
   Navigation.registerComponent('example.ThirdTabScreen', () => ThirdTabScreen);
   Navigation.registerComponent('example.PushedScreen', () => PushedScreen);

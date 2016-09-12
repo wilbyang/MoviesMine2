@@ -36,6 +36,7 @@ export default class SideMenu extends Component {
           <SidemenuItem iconName="film" iconColor="black" iconSize={15} title="Profile" onPress={this.onModalPress.bind(this)} />
           <SidemenuItem iconName="heart" iconColor="black" iconSize={15} title="Bookmark" onPress={this.onModalPress.bind(this)} />
           <SidemenuItem iconName="home" iconColor="black" iconSize={16} title="Home" onPress={this.onModalPress.bind(this)} />
+          <SidemenuItem iconName="home" iconColor="black" iconSize={16} title="Home" onPress={this.onModalPress.bind(this)} />
 
 
 
@@ -62,8 +63,8 @@ export default class SideMenu extends Component {
   }
   onModalPress() {
     this.props.navigator.showModal({
-      title: "Modal",
-      screen: "example.ModalScreen"
+      title: "MapScreen",
+      screen: "MapScreen"
     });
   }
   onModalProfilePress() {

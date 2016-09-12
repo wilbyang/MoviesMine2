@@ -16,19 +16,17 @@ export default class SideMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      avatarSource: null
-    }
+      avatarSource: {
+        uri: 'http://www.symbio.com/wp-content/uploads/2016/01/symbio_logo_grey.jpg'
+      }
+    };
   }
   render() {
     return (
       <View style={{paddingTop:40, flex: 1, backgroundColor: 'grey'}}>
         <View style={{alignItems: 'center'}}>
           <TouchableOpacity onPress={ this.onModalProfilePress.bind(this) }>
-            { this.state.avatarSource === null ?
-              <Image style={styles.image} source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/d/d2/Donald_Trump_August_19%2C_2015_%28cropped%29.jpg'}}></Image>
-              :
-              <Image style={styles.avatar} source={this.state.avatarSource} />
-            }
+            <Image style={styles.image} source={this.state.avatarSource} />
           </TouchableOpacity>
         </View>
         <View style={{marginLeft: 30, flex:1, alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column'}}>

@@ -1,58 +1,96 @@
-import React, {Component} from 'react';
+import React, {
+  Component
+} from "react";
+
 import {
   AppRegistry,
-  View
-} from 'react-native';
-import {Navigation} from 'react-native-navigation';
+  Navigator,
+} from "react-native";
 
-// screen related book keeping
-import {registerScreens} from './screens';
-import FireDB from './firedb/firedb'
-FireDB.initialise();
-registerScreens();
+import * as firebase from "firebase";
 
-// this will start our app
-Navigation.startSingleScreenApp({
-  screen: {
-    screen: 'MovieSearch',
-    title: 'Movies',
-    passProps: {
-      navigatorButtons: {
-        leftButtons: [{
-          icon: require('./img/navicon_menu.png'),
-          id: 'menu'
-        }],
-        rightButtons: [
-          {
-            title: 'Edit',
-            id: 'edit'
-          },
-          {
-            icon: require('./img/navicon_add.png'),
-            id: 'add'
-          }
-        ]
-      },
-      navigatorStyle: {
-        drawUnderTabBar: true
-      }
-    },
-    navigatorStyle: {
-      navBarBackgroundColor: '#4dbce9',
-      navBarTextColor: '#ffff00',
-      navBarSubtitleTextColor: '#ff0000',
-      navBarButtonColor: '#ffffff',
-      statusBarTextColorScheme: 'light'
-    }
-  },
-  drawer: {
-    left: {
-      screen: 'example.SideMenu'
-    }
+import Home from "./screens/home";
+import Login from "./screens/login";
+import FireDB from "./firedb/firedb";
+
+class Initial extends Component {
+
+  constructor(props) {
+    super(props);
+
+    FireDB.initialise();
+
+    this.getInitialView();
+
+    this.state = {
+      userLoaded: false,
+      initialView: null
+    };
+
+    this.getInitialView = this.getInitialView.bind(this);
+
   }
-  // tabsStyle: {
-  //   tabBarButtonColor: '#ffff00',
-  //   tabBarSelectedButtonColor: '#ff9900',
-  //   tabBarBackgroundColor: '#551A8B'
-  // },
-});
+
+  getInitialView() {
+
+    firebase.auth().onAuthStateChanged((user) => {
+
+      let initialView = user ? "Home" : "Login";
+
+      this.setState({
+        userLoaded: true,
+        initialView: initialView
+      })
+    });
+
+
+  }
+
+  static renderScene(route, navigator) {
+
+    switch (route.name) {
+
+      case "Home":
+        return (<Home navigator={navigator} />);
+        break;
+
+      case "Login":
+        return (<Login navigator={navigator} />);
+        break;
+
+    }
+
+  }
+
+  static configureScene(route) {
+
+    if (route.sceneConfig) {
+      return (route.sceneConfig);
+    } else {
+      return ({
+        ...Navigator.SceneConfigs.HorizontalSwipeJump,
+        gestures: {}
+      });
+    }
+
+  }
+
+  render() {
+
+    if (this.state.userLoaded) {
+
+      return (
+        <Navigator
+          initialRoute={{name: this.state.initialView}}
+          renderScene={Initial.renderScene}
+          configureScene={Initial.configureScene}
+        />);
+    } else {
+      return null;
+    }
+
+  }
+
+}
+
+AppRegistry.registerComponent("MoviesApp", () => Initial);

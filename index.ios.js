@@ -7,6 +7,8 @@ import {Navigation} from 'react-native-navigation';
 
 // screen related book keeping
 import {registerScreens} from './screens';
+import FireDB from './firedb/firedb'
+FireDB.initialise();
 registerScreens();
 
 // this will start our app

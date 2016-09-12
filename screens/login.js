@@ -20,7 +20,7 @@ import {Sae} from "react-native-textinput-effects";
 import DismissKeyboard from "dismissKeyboard";
 
 
-class Login extends Component {
+export default class Login extends Component {
     constructor(props) {
         super(props);
 
@@ -154,4 +154,3 @@ const styles = StyleSheet.create({
     }
 });
 
-module.exports = Login;

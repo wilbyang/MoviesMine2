@@ -13,12 +13,14 @@ import LightBoxScreen from './LightBoxScreen';
 import MapScreen from './MapScreen';
 import NotificationScreen from './NotificationScreen'
 import SideMenu from './SideMenu';
+import Login from './login';
 
 // register all screens of the app (including internal ones)
 export function registerScreens() {
   Navigation.registerComponent('MovieSearch', () => SearchScreen);
   Navigation.registerComponent('MovieScreen', () => MovieScreen);
-  Navigation.registerComponent('MapScreen', () => MapScreen);
+  Navigation.registerComponent('Login', () => Login);
+  Navigation.registerComponent('MapScreen', () => MovieScreen);
   Navigation.registerComponent('ProfileImagePicker', () => ProfileImagePicker);
   Navigation.registerComponent('example.SecondTabScreen', () => SecondTabScreen);
   Navigation.registerComponent('example.ThirdTabScreen', () => ThirdTabScreen);

@@ -14,7 +14,7 @@ registerScreens();
 // this will start our app
 Navigation.startSingleScreenApp({
   screen: {
-    screen: 'MovieSearch',
+    screen: 'Login',
     title: 'Movies',
     passProps: {
       navigatorButtons: {

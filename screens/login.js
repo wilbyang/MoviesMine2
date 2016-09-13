@@ -10,9 +10,8 @@ import {
     StyleSheet,
     dismissKeyboard,
     TouchableWithoutFeedback,
-    Button
 } from "react-native";
-
+import Button from "apsl-react-native-button";
 import React, {Component} from "react";
 import * as firebase from "firebase";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
@@ -21,6 +20,10 @@ import DismissKeyboard from "dismissKeyboard";
 
 
 export default class Login extends Component {
+    static navigatorStyle = {
+        navBarHidden:true,
+        drawUnderTabBar: false
+    };
     constructor(props) {
         super(props);
 
@@ -111,7 +114,7 @@ export default class Login extends Component {
                         />
 
                         <View style={styles.submit}>
-                            <Button onPress={this.signup} style={{}} textStyle={{fontSize: 18}}>
+                            <Button onPress={this.signup} style={{backgroundColor:"grey"}} textStyle={{fontSize: 18}}>
                                 Sign up
                             </Button>
                             <Button onPress={this.login} style={styles.buttons} textStyle={{fontSize: 18}}>

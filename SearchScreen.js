@@ -81,7 +81,6 @@ class SearchScreen extends React.Component {
     ]
   };
   static navigatorStyle = {
-    navBarHidden:true,
     drawUnderTabBar: false
   };
   constructor(props) {

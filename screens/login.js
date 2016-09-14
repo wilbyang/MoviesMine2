@@ -10,6 +10,7 @@ import {
     StyleSheet,
     dismissKeyboard,
     TouchableWithoutFeedback,
+    AsyncStorage
 } from "react-native";
 import Button from "apsl-react-native-button";
 import React, {Component} from "react";
@@ -72,10 +73,11 @@ export default class Login extends Component {
             this.setState({
                 response: "Logged In!"
             });
-
+            //await AsyncStorage.multiSet([['email', this.state.email], ['pwd', this.state.password]]);
             setTimeout(() => {
                 this.props.navigator.push({
-                    name: "Home"
+                    name: "Home",
+                    screen:"MovieSearch"
                 })
             }, 1500);
 

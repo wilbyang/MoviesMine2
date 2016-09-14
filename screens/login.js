@@ -3,14 +3,14 @@
  */
 
 import {
-    AppRegistry,
-    TextInput,
-    Text,
-    View,
-    StyleSheet,
-    dismissKeyboard,
-    TouchableWithoutFeedback,
-    AsyncStorage
+  AppRegistry,
+  TextInput,
+  Text,
+  View,
+  StyleSheet,
+  dismissKeyboard,
+  TouchableWithoutFeedback,
+  AsyncStorage
 } from "react-native";
 import Button from "apsl-react-native-button";
 import React, {Component} from "react";
@@ -21,141 +21,159 @@ import DismissKeyboard from "dismissKeyboard";
 
 
 export default class Login extends Component {
-    static navigatorStyle = {
-        navBarHidden:true,
-        drawUnderTabBar: false
+  static navigatorStyle = {
+    navBarHidden: true,
+    drawUnderTabBar: false
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: "",
+      password: "",
+      response: ""
     };
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            email: "",
-            password: "",
-            response: ""
-        };
+    this.signup = this.signup.bind(this);
+    this.login = this.login.bind(this);
+  }
 
-        this.signup = this.signup.bind(this);
-        this.login = this.login.bind(this);
+  componentDidMount() {
+    this.determineScreen();
+  }
+  async determineScreen() {
+
+    const email = await AsyncStorage.getItem("email");
+    if (email !== null) {
+      this.props.navigator.push({
+        name: "Home",
+        screen: "MovieSearch"
+      });
+    }
+  }
+
+  async signup() {
+
+    DismissKeyboard();
+
+    try {
+      await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password);
+
+      this.setState({
+        response: "account created"
+      });
+
+      setTimeout(() => {
+        this.props.navigator.push({
+          name: "Home",
+          screen: "MovieSearch"
+        })
+      }, 1500);
+
+    } catch (error) {
+      this.setState({
+        response: error.toString()
+      })
     }
 
-    async signup() {
+  }
 
-        DismissKeyboard();
+  async login() {
 
-        try {
-            await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password);
+    DismissKeyboard();
 
-            this.setState({
-                response: "account created"
-            });
+    try {
+      await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
 
-            setTimeout(() => {
-                this.props.navigator.push({
-                    name: "Home"
-                })
-            }, 1500);
+      this.setState({
+        response: "Logged In!"
+      });
+      await AsyncStorage.multiSet([['email', this.state.email], ['pwd', this.state.password]]);
+      setTimeout(() => {
+        this.props.navigator.push({
+          name: "Home",
+          screen: "MovieSearch"
+        })
+      }, 1500);
 
-        } catch (error) {
-            this.setState({
-                response: error.toString()
-            })
-        }
-
+    } catch (error) {
+      this.setState({
+        response: error.toString()
+      })
     }
 
-    async login() {
+  }
 
-        DismissKeyboard();
+  render() {
 
-        try {
-            await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
+    return (
+      <TouchableWithoutFeedback onPress={() => {
+        DismissKeyboard()
+      }}>
+        <View style={{flex: 1, backgroundColor: "grey"}}>
+          <View style={styles.formGroup}>
+            <Text style={styles.title}>Firebase Sample</Text>
+            <Sae
+              label={"Email Address"}
+              iconClass={FontAwesomeIcon}
+              iconName={"pencil"}
+              iconColor={"white"}
+              onChangeText={(email) => this.setState({email})}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+            <Sae
+              label={"Password"}
+              iconClass={FontAwesomeIcon}
+              iconName={"key"}
+              iconColor={"white"}
+              onChangeText={(password) => this.setState({password})}
+              password={true}
+              autoCapitalize="none"
+            />
 
-            this.setState({
-                response: "Logged In!"
-            });
-            //await AsyncStorage.multiSet([['email', this.state.email], ['pwd', this.state.password]]);
-            setTimeout(() => {
-                this.props.navigator.push({
-                    name: "Home",
-                    screen:"MovieSearch"
-                })
-            }, 1500);
-
-        } catch (error) {
-            this.setState({
-                response: error.toString()
-            })
-        }
-
-    }
-
-    render() {
-
-        return (
-            <TouchableWithoutFeedback onPress={() => {DismissKeyboard()}}>
-                <View style={{flex:1, backgroundColor:"grey"}}>
-                    <View style={styles.formGroup}>
-                        <Text style={styles.title}>Firebase Sample</Text>
-                        <Sae
-                            label={"Email Address"}
-                            iconClass={FontAwesomeIcon}
-                            iconName={"pencil"}
-                            iconColor={"white"}
-                            onChangeText={(email) => this.setState({email})}
-                            keyboardType="email-address"
-                            autoCapitalize="none"
-                        />
-                        <Sae
-                            label={"Password"}
-                            iconClass={FontAwesomeIcon}
-                            iconName={"key"}
-                            iconColor={"white"}
-                            onChangeText={(password) => this.setState({password})}
-                            password={true}
-                            autoCapitalize="none"
-                        />
-
-                        <View style={styles.submit}>
-                            <Button onPress={this.signup} style={{backgroundColor:"grey"}} textStyle={{fontSize: 18}}>
-                                Sign up
-                            </Button>
-                            <Button onPress={this.login} style={styles.buttons} textStyle={{fontSize: 18}}>
-                                Login
-                            </Button>
-                        </View>
-                    </View>
-                    <View>
-                        <Text style={styles.response}>{this.state.response}</Text>
-                    </View>
-                </View>
-            </TouchableWithoutFeedback>
-        );
-    }
+            <View style={styles.submit}>
+              <Button onPress={this.signup} style={{backgroundColor: "grey"}} textStyle={{fontSize: 18}}>
+                Sign up
+              </Button>
+              <Button onPress={this.login} style={styles.buttons} textStyle={{fontSize: 18}}>
+                Login
+              </Button>
+            </View>
+          </View>
+          <View>
+            <Text style={styles.response}>{this.state.response}</Text>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
 
-    formGroup: {
-        padding: 50
-    },
+  formGroup: {
+    padding: 50
+  },
 
-    title: {
-        paddingBottom: 16,
-        textAlign: "center",
-        color: "#000",
-        fontSize: 35,
-        fontWeight: "bold",
-        opacity: 0.8,
-    },
+  title: {
+    paddingBottom: 16,
+    textAlign: "center",
+    color: "#000",
+    fontSize: 35,
+    fontWeight: "bold",
+    opacity: 0.8,
+  },
 
-    submit: {
-        paddingTop: 30
-    },
+  submit: {
+    paddingTop: 30
+  },
 
-    response: {
-        textAlign: "center",
-        paddingTop: 0,
-        padding: 50
-    }
+  response: {
+    textAlign: "center",
+    paddingTop: 0,
+    padding: 50
+  }
 });
 

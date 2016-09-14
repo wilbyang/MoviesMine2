@@ -19,6 +19,8 @@ import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import {Sae} from "react-native-textinput-effects";
 import DismissKeyboard from "dismissKeyboard";
 
+import SearchScreen from './../SearchScreen'
+
 
 export default class Login extends Component {
   static navigatorStyle = {
@@ -40,7 +42,7 @@ export default class Login extends Component {
   }
 
   componentDidMount() {
-    this.determineScreen();
+    //this.determineScreen();
   }
   async determineScreen() {
 
@@ -107,13 +109,14 @@ export default class Login extends Component {
 
   render() {
 
-    return (
+    var content = this.state.email !== "xxhh" ?
+      <SearchScreen navigator = {this.props.navigator} /> :
       <TouchableWithoutFeedback onPress={() => {
         DismissKeyboard()
       }}>
         <View style={{flex: 1, backgroundColor: "grey"}}>
           <View style={styles.formGroup}>
-            <Text style={styles.title}>Firebase Sample</Text>
+            <Text style={styles.title}>Login</Text>
             <Sae
               label={"Email Address"}
               iconClass={FontAwesomeIcon}
@@ -146,7 +149,12 @@ export default class Login extends Component {
             <Text style={styles.response}>{this.state.response}</Text>
           </View>
         </View>
-      </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>;
+
+    return (
+      <View style={{flex:1}}>
+        {content}
+      </View>
     );
   }
 }

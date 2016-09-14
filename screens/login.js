@@ -41,20 +41,6 @@ export default class Login extends Component {
     this.login = this.login.bind(this);
   }
 
-  componentDidMount() {
-    //this.determineScreen();
-  }
-  async determineScreen() {
-
-    const email = await AsyncStorage.getItem("email");
-    if (email !== null) {
-      this.props.navigator.push({
-        name: "Home",
-        screen: "MovieSearch"
-      });
-    }
-  }
-
   async signup() {
 
     DismissKeyboard();
@@ -109,8 +95,7 @@ export default class Login extends Component {
 
   render() {
 
-    var content = this.state.email !== "xxhh" ?
-      <SearchScreen navigator = {this.props.navigator} /> :
+    return (
       <TouchableWithoutFeedback onPress={() => {
         DismissKeyboard()
       }}>
@@ -149,12 +134,7 @@ export default class Login extends Component {
             <Text style={styles.response}>{this.state.response}</Text>
           </View>
         </View>
-      </TouchableWithoutFeedback>;
-
-    return (
-      <View style={{flex:1}}>
-        {content}
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

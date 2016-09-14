@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {
   AppRegistry,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 import {Navigation} from 'react-native-navigation';
 
@@ -11,10 +12,16 @@ import FireDB from './firedb/firedb'
 FireDB.initialise();
 registerScreens();
 
+const email = AsyncStorage.getItem("email");
+var screen = "";
+if (email !== null) {
+  screen = "MovieSearch"
+} else screen = "Login";
+
 // this will start our app
 Navigation.startSingleScreenApp({
   screen: {
-    screen: 'Login',
+    screen: screen,
     title: 'Movies',
     passProps: {
       navigatorButtons: {
